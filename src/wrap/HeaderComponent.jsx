@@ -1,5 +1,6 @@
 import React from "react";
 import './scss/Header.scss';
+import {Link, Outlet} from "react-router-dom"
 
 export default function HeaderComponent(){
     const [header, setHeader] = React.useState(false);
@@ -17,16 +18,17 @@ export default function HeaderComponent(){
     },[]);
 
     return(
+        <>
         <header id="header">
             <div className="row1">
                 <div className="container">
                     <div className="content">
                         <aside id="aside">
-                            <a href="!#" className="on">회원가입</a>
+                            <Link to="/signup" className="on">회원가입</Link>
                             <i>|</i>                            
-                            <a href="!#">로그인</a>
+                            <Link to="/signin">로그인</Link>
                             <i>|</i>
-                            <a href="!#">고객센터</a>
+                            <Link to="/notice">고객센터</Link>
                         </aside>
                     </div>
                 </div>
@@ -35,7 +37,7 @@ export default function HeaderComponent(){
                 <div className="container">
                     <div className="content">
                         <div className="left">
-                            <a href="!#"><span></span><strong>마켓컬리</strong></a><i>|</i><a href="!#">뷰티컬리</a>
+                            <Link to="/index"><span></span><strong>마켓컬리</strong></Link><i>|</i><a href="!#">뷰티컬리</a>
                         </div>
                         <div className={`center${header?' on':''}`}>
                             <input className={header?'on':''} type="text" name="search" id="search" placeholder="검색어를 입력해 주세요" />
@@ -60,10 +62,10 @@ export default function HeaderComponent(){
                         </div>
                         <div className={`center${header?' on':''}`}>
                             <nav>
-                                <a href="!#">신상품</a>
-                                <a href="!#">베스트</a>
-                                <a href="!#">알뜰상품</a>
-                                <a href="!#">특가혜택</a>
+                                <Link to="/sub1">신상품</Link>
+                                <Link to="/sub2">베스트</Link>
+                                <Link to="/sub3">알뜰상품</Link>
+                                <Link to="/sub4">특가혜택</Link>
                             </nav>
                         </div>
                         <div className={`right${header?' on':''}`}>
@@ -72,6 +74,9 @@ export default function HeaderComponent(){
                     </div>
                 </div>
             </div>
+            
         </header>
+        <Outlet/>
+        </>
     )
 }

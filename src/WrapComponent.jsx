@@ -1,4 +1,5 @@
 import React from "react";
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import TopModalComponent from './wrap/TopModalComponent';
 import HeaderComponent from './wrap/HeaderComponent';
 
@@ -144,24 +145,28 @@ export default function WrapComponent(){
 
     return(
         <div id="wrap">
-            {   // 상태변수가 => 프롭스(부모컴포넌트가 자식컴포넌트에게 내려주는변수값, 함수)
-                topModal && <TopModalComponent setTopModal={setTopModal} />
-            }
-            <HeaderComponent />
-            <MainComponent viewProductSetter={viewProductSetter}/>
-            {hide && <Sub1Component />}
-            {hide && <Sub2Component />}
-            {hide && <Sub3Component />}
-            {hide && <Sub4Component />}
-            {hide && <SignUpComponent />}
-            {hide && <SignInComponent />}
-            {hide && <SignInIdSearchComponent />}
-            {hide && <SignInPwSearchComponent /> }
-            {hide && <NoticeComponent />}
+            {  topModal && <TopModalComponent setTopModal={setTopModal} />}
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<HeaderComponent/>} >
+                        <Route index element={<MainComponent viewProductSetter={viewProductSetter}/>}/>
+                        <Route path="/index" element={<MainComponent viewProductSetter={viewProductSetter}/>}/>
+                        <Route path="/sub1" element={<Sub1Component />}/>
+                        <Route path="/sub2" element={<Sub2Component />}/>
+                        <Route path="/sub3" element={<Sub3Component />}/>
+                        <Route path="/sub4" element={<Sub4Component />}/>
+                        <Route path="/signup" element={<SignUpComponent />}/>
+                        <Route path="/signin" element={<SignInComponent />}/>
+                        <Route path="/idsearch" element={<SignInIdSearchComponent />}/>
+                        <Route path="/pwsearch" element={<SignInPwSearchComponent /> }/>
+                        <Route path="/notice" element={<NoticeComponent />}/>
+                    </Route>
+                </Routes>
+            </BrowserRouter>
             <FooterComponent />
             <QuickMenuComponent product={product} />
             <GoTopComponent />
-            {hide && <MainModalComponent />}
+            <MainModalComponent />
         </div>
     )
 }
