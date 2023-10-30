@@ -23,10 +23,10 @@ export default function Section3Component({viewProductSetter}){
         .then((res)=>{
             if(res.status===200){
                 setState({    
-                    타임세일:res.data.section3.caption.타임세일,
-                    세일시간:res.data.section3.caption.세일시간,                
-                    캡션: res.data.section3.caption,
-                    상품: res.data.section3.product,
+                    타임세일:res.data.section.caption.타임세일,
+                    세일시간:res.data.section.caption.세일시간,                
+                    캡션: res.data.section.caption,
+                    상품: res.data.section.product,
                 })
             }
         })

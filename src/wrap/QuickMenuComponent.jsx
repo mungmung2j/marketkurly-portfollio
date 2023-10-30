@@ -30,6 +30,46 @@ export default function QuickMenuComponent({product}){
 
     },[product]);
 
+    //퀵메뉴 슬라이드 구현
+    //0. 상태관리 변수 카운트변수
+    const [cnt, setCnt]=React.useState(0);
+
+    //1.선택자 유즈래프 useRef()
+    const refSlideWrap=React.useRef();
+
+
+    //2-1.다음 슬라이드 이미지
+    const onClickNext=(e)=>{
+        e.preventDefault();
+        let n=product.length-3; //5(전체 이미지개수)-3=2  10-3=7
+        if(cnt<n){
+            setCnt(cnt+1); 
+        }
+        
+        }
+
+    //2-2.이전 슬라이드 이미지
+    const onClickPrev=(e)=>{
+        e.preventDefault();
+        if(cnt>0){
+            setCnt(cnt-1);  //0끝
+        }
+        
+        }
+
+    //3.카운트 증감이 발생하면 동작하는 이펙트
+    React.useEffect(()=>{
+        //예외처리: 이유 로딩시 선택자를 인식하는데 느리기 때문에
+        try{
+            refSlideWrap.current.style.transition='all 0.3s';
+            refSlideWrap.current.style.transform=`translateY(${-85*cnt}px)`;
+        }
+        catch(e){
+            
+        }
+
+    },[cnt])  
+
     return(
         <div id="quickMenu" className={quickMenu?'on':''}>
             <div className="container">
@@ -47,15 +87,15 @@ export default function QuickMenuComponent({product}){
                     viewProduct  &&  (
                         <div className="bottom">
                             <div className="up">
-                                <a href="!#"><img src="./img/quick_menu/icon_up.svg" alt="" /></a> 
+                                <a href="!#" onClick={onClickPrev}><img src="./img/quick_menu/icon_up.svg" alt="" /></a> 
                                 <h2>최근본상품</h2>
                             </div>
                             <div className="list">
-                                <ul>
+                                <ul ref={refSlideWrap}>
                                     {
-                                        product.map((item)=>{
+                                        product.map((item, idx)=>{
                                             return(
-                                                    <li>
+                                                    <li key={idx}>
                                                         <a href="!#">
                                                             <img src={item.제품이미지} alt="" />
                                                         </a>
@@ -67,7 +107,7 @@ export default function QuickMenuComponent({product}){
                                 </ul>
                             </div>
                             <div className="down">
-                            <a href="!#"><img src="./img/quick_menu/icon_up.svg" alt="" /></a> 
+                            <a href="!#" onClick={onClickNext}><img src="./img/quick_menu/icon_up.svg" alt="" /></a> 
                             </div>
                         </div>
                     )

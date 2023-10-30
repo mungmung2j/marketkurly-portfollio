@@ -37,7 +37,7 @@ export default function HeaderComponent(){
                 <div className="container">
                     <div className="content">
                         <div className="left">
-                            <Link to="/index"><span></span><strong>마켓컬리</strong></Link><i>|</i><a href="!#">뷰티컬리</a>
+                            <Link to="/"><span></span><strong>마켓컬리</strong></Link><i>|</i><a href="!#">뷰티컬리</a>
                         </div>
                         <div className={`center${header?' on':''}`}>
                             <input className={header?'on':''} type="text" name="search" id="search" placeholder="검색어를 입력해 주세요" />

@@ -1,0 +1,99 @@
+.sub {
+  width:100%;
+  background: #fff;
+  #section1 {
+      width:100%;
+      .container {
+          width: 1068px; 
+          margin: 0 auto;           
+          .title {
+              width: 100%;
+              padding: 0 18px 0 0;
+              .title-image {
+                  width: 100%;
+                  img {
+                      width: 100%;
+                  }
+              }
+              .title-text {
+                  width: 100%;
+                  text-align: center;
+                  padding: 50px 0;
+                  h2 {
+                      font-size: 28px;
+                      font-weight: 600;
+                      color: #333;
+                  }
+              }
+          }
+          .content {
+              width:100%;
+              display: flex;
+              .left {
+                  width:267px;
+                  .gap {
+                      width: 100%;
+                      padding: 0 18px 0 0;
+                      .header {
+                          width: 100%;                            
+                          height: 41px;
+                          display: flex;
+                          justify-content: space-between;
+                          align-items: flex-start;
+                          h3 {
+                              font-size: 15px;
+                              font-weight: 600;
+                              color:#333;
+                          }
+                          span {
+                              img {width:12px;height:12px;}
+                              button {
+                                  font-size: 15px;
+                                  font-weight: 600;
+                                  color:#ddd;
+                              }
+                          }
+                      }
+                      .nav {
+                          width:100%;
+                          height: 1000px;
+                          background-color: #c99;    
+                      }
+                  }
+              }
+              .right {
+                  width:267px * 3;
+                  .header {
+                      width: 100%;
+                      height: 40px;
+                      padding: 0 18px 0 0;
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: flex-start;
+                          h3 {
+                              font-size: 15px;
+                              font-weight: 600;
+                              color:#333;
+                          }
+                          span {
+                              a {
+                                  font-size: 15px;
+                                  font-weight: 600;
+                                  color:#999;
+                                  img {
+                                      width:14px;
+                                      height:20px;
+                                  }
+                              }
+                          }
+                  }
+                  .product-box {
+                      width:100%;
+                      height: 1000px;
+                      background-color: #99c;
+                  }
+              }
+          }
+      }
+  }
+}

@@ -21,8 +21,8 @@ export default function Section2Component({viewProductSetter}){
         .then((res)=>{
             if(res.status===200){
                 setState({
-                    캡션: res.data.section2.caption,
-                    상품: res.data.section2.product
+                    캡션: res.data.section.caption,
+                    상품: res.data.section.product
                 });
             }
         })

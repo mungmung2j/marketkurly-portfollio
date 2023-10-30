@@ -1,5 +1,7 @@
 {
-  "section8" : {
+  "section" : {
+    "subject":"section8",      
+
       "caption": {
           "캡션1": "아베다 원데이 💜",
           "캡션2": "전 상품 15% 할인 + 17% 쿠폰 혜택"

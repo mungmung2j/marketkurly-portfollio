@@ -13,7 +13,7 @@ export default function Section4Component(){
         })
         .then((res)=>{
             if(res.status===200){
-                setImg(res.data.section4.product[0].제품이미지)
+                setImg(res.data.section.product[0].제품이미지)
             }
         })
         .catch((err)=>{

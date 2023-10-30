@@ -1,5 +1,7 @@
 {
-    "section2" : {
+    "section" : {
+        "subject":"section2",      
+
         "caption": {
             "캡션1": "안주도 배달 말고 샛별 배송",
             "캡션2": "🥇금메달 응원할 때 필수",

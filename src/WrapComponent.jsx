@@ -28,8 +28,10 @@ export default function WrapComponent(){
     const [product, setProduct]=React.useState([]);
 
 
+    //모달창
     //최근 본 상품 상태관리 변수
     const [state, setState] = React.useState({
+        isMainModal:true,
         viewProduct:{
             제품코드:'',
             제품이미지:'',
@@ -44,10 +46,21 @@ export default function WrapComponent(){
 
     //2.최근 본 상품 상태변수 변경하는 메서드
     const viewProductSetter=(item, imgPath)=>{
+        let img='';
+        /* console.log(imgPath);
+        console.log(imgPath.indexOf(`section3`)); */
+
+        //검색이 완료되면 글자 위치를 정수로 표현 출력
+        //검색이 안되면 -1을 출력
+        if(imgPath.indexOf('section3')!==-1){
+            img='08c24fb2-96c0-4109-9ab7-f8d7e334bdc4.jpeg';
+            
+
+        }
         setState({
             viewProduct:{
                 제품코드:item.제품코드,
-                제품이미지:`${imgPath}${item.제품이미지}`,
+                제품이미지:`${imgPath}${img===''?item.제품이미지:img}`,
                 제품명:item.제품명,
                 할인율:item.할인율,
                 정가:item.정가,
@@ -143,6 +156,62 @@ export default function WrapComponent(){
         }
     },[]); // 빈배열을 사용 1회만 실행하도록
 
+
+    //모달창 닫기
+    const modalCloseMethod=(expires)=>{
+
+        setState({
+            ...state,
+            isMainModal:false
+        })
+
+        if(expires===1){
+            //오늘 날짜+1
+            let toDay=new Date();
+            toDay.setDate(toDay.getDate()+1);//하루
+
+/*             toDay.setUTCMinutes(toDay.getMinutes()+1); //1분
+ */            const obj ={
+                id:"main_modal_2023102801",
+                expires:toDay.getTime()
+            }
+            localStorage.setItem('KURLY_MAIN_MODAL', JSON.stringify(obj));
+        }
+    }
+
+    //로딩 시 메인모달 만료일 expires체크
+    //로컬스토리지 저장소 데이터 가져와서 비교
+    //만료일이 남았으면 모달창 false
+    //만료일이 지나면 모달창 true 그리고 로컬스토리지 저장소 데이터 삭제
+    React.useEffect(()=>{
+        try{
+            const result = JSON.parse(localStorage.getItem('KURLY_MAIN_MODAL'));
+            
+            const toDay=new Date();
+            if(toDay>result.expires){
+                setState({
+                    ...state,
+                    isMainModal:true
+                })
+                localStorage.removeItem('KURLY_MAIN_MODAL')
+            }
+            else{
+                setState({
+                    ...state,
+                    isMainModal:false
+                })
+            }
+        }
+        catch{
+
+        }
+
+        
+
+    },[])
+
+
+
     return(
         <div id="wrap">
             {  topModal && <TopModalComponent setTopModal={setTopModal} />}
@@ -150,6 +219,7 @@ export default function WrapComponent(){
                 <Routes>
                     <Route path="/" element={<HeaderComponent/>} >
                         <Route index element={<MainComponent viewProductSetter={viewProductSetter}/>}/>
+
                         <Route path="/index" element={<MainComponent viewProductSetter={viewProductSetter}/>}/>
                         <Route path="/sub1" element={<Sub1Component />}/>
                         <Route path="/sub2" element={<Sub2Component />}/>
@@ -166,7 +236,7 @@ export default function WrapComponent(){
             <FooterComponent />
             <QuickMenuComponent product={product} />
             <GoTopComponent />
-            <MainModalComponent />
+            {state.isMainModal&&<MainModalComponent modalCloseMethod={modalCloseMethod}/>}
         </div>
     )
 }
